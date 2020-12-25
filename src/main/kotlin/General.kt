@@ -14,17 +14,14 @@ val gson = Gson()
 val parser = JsonParser()
 val config = gson.fromJson<Config>(File("config.json").readText())
 
-val baseObject = PorfRequest(50, "Гризли: название одного либо нескольких американских подвидов бурого медведя. Распространён преимущественно на Аляске (включая прилегающие острова) и в западных районах Канады. Небольшая популяция этих животных сохранилась в континентальной части США в Монтане, в районе Йеллоустона и на северо-западе Вашингтона. Факт о гризли: Гризли")
+const val baseContextPrompt = "Гризли: название одного либо нескольких американских подвидов бурого медведя. Распространён преимущественно на Аляске (включая прилегающие острова) и в западных районах Канады. Небольшая популяция этих животных сохранилась в континентальной части США в Монтане, в районе Йеллоустона и на северо-западе Вашингтона. Факт о гризли: "
 
 val client = OkHttpClient.Builder()
-    .connectTimeout(60, TimeUnit.SECONDS)
-    .readTimeout(60, TimeUnit.SECONDS)
-    .build()
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .build()!!
 
-val request = Request.Builder()
-    .url("https://pelevin.gpt.dobro.ai/generate/")
-    .post(RequestBody.create(MediaType.parse("text/plain"), gson.toJson(baseObject)))
-    .build()
+val requestBuilder = Request.Builder()
 
 data class Config(
     @SerializedName("bot_token") val botToken: String,
