@@ -33,3 +33,14 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+shadowJar{
+    manifest {
+        attributes "Main-Class": "MainKt"
+    }
+
+    copy {
+        from 'config.json'
+        into "${libsDir.path}/config.json"
+    }
+}

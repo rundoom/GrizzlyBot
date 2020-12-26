@@ -22,8 +22,17 @@ val bot = bot {
             }
         }
 
-        message(Filter.Chat(153174359)) { bot, update ->
-            collectFacts().take(6).forEach {
+        message(Filter.Text) { bot, update ->
+            val text = update.message!!.text!!
+            if ("гризли" !in text) {
+                bot.sendMessage(
+                        update.message!!.chat.id,
+                        text = "Текст должен содержать слово \"гризли\""
+                )
+                return@message
+            }
+
+            collectFacts(text).take(6).forEach {
                 bot.sendMessage(
                         update.message!!.chat.id,
                         text = "${update.message!!.text}$it",
@@ -33,7 +42,7 @@ val bot = bot {
         }
 
         callbackQuery(REPOST_MESSAGE) { bot, update ->
-            bot.forwardMessage(config.channelId, update.message!!.chat.id, update.message!!.messageId)
+            bot.sendMessage(config.channelId, update.callbackQuery!!.message!!.text!!)
 
             bot.deleteMessage(
                     update.callbackQuery?.message?.chat!!.id,
