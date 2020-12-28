@@ -41,6 +41,6 @@ shadowJar{
 
     copy {
         from 'config.json'
-        into "${libsDir.path}/config.json"
+        into "${libsDir.path}"
     }
 }
