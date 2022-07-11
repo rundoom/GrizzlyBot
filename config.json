@@ -1,5 +1,5 @@
 {
-  "bot_token" : "1495046461:AAFemozJB91fHM1-Vy1KEq07aJSMZNOgyGs",
+  "bot_token" : "{token}",
   "channel_id": "-1001412495361",
   "chron_mask_for_launching": "0 0 10 * * ?"
 }
